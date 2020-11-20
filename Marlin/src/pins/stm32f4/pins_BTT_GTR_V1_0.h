@@ -255,6 +255,19 @@
 #define MAX6675_SCK_PIN           THERMO_SCK_PIN
 #define MAX6675_DO_PIN             THERMO_DO_PIN
 
+
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 PH8
+  #define MAX31865_SCK_PIN                  PH7
+  #define MAX31865_MOSI_PIN                 PH10
+  #define MAX31865_CS_PIN                   PH13
+  #define MAX31865_CS2_PIN                  PI9
+#endif
+
+
 //
 // Heaters / Fans
 //

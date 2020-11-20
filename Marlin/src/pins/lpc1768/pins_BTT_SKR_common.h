@@ -67,6 +67,19 @@
   #define TEMP_BED_PIN                  P0_23_A0  // A0 (T0) - (67) - TEMP_BED_PIN
 #endif
 
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 P0_28
+  #define MAX31865_SCK_PIN                  P1_30
+  #define MAX31865_MOSI_PIN                 P1_19
+  #define MAX31865_CS_PIN                   P1_18
+  #define MAX6675_SS_PIN                    P1_22
+  #define MAX31865_CS2_PIN                  P1_21
+  #define MAX6675_SS2_PIN                   P1_22
+#endif
+
 #if HOTENDS == 1
   #if TEMP_SENSOR_PROBE
     #define TEMP_PROBE_PIN            TEMP_1_PIN
@@ -125,6 +138,10 @@
 #endif
 
 #if HAS_BTT_EXP_MOT
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
 /*               _____                                      _____
  *           NC | · · | GND                             NC | · · | GND
  *           NC | · · | 1.31 (M1EN)            (M2EN) 1.23 | · · | 1.22 (M3EN)

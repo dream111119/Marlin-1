@@ -164,6 +164,19 @@
 //#define TEMP_2_PIN                       P1_30  // Onboard thermistor
 #define TEMP_BED_PIN                       P0_25
 
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 P0_18
+  #define MAX31865_SCK_PIN                  P0_17
+  #define MAX31865_MOSI_PIN                 P0_15
+  #define MAX31865_CS_PIN                   P0_20
+  #define MAX6675_SS_PIN                    P0_16
+  #define MAX31865_CS2_PIN                  P0_19
+  #define MAX6675_SS2_PIN                   P0_16
+#endif
+
 //
 // Heaters / Fans
 //
@@ -194,6 +207,10 @@
 #define EXPA1_10_PIN                       P2_08
 
 #if HAS_WIRED_LCD
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
 
   #if ENABLED(CR10_STOCKDISPLAY)
 

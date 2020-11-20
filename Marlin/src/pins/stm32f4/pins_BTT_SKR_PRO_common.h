@@ -231,6 +231,19 @@
 #define TEMP_2_PIN                          PF6   // T3 <-> E2
 #define TEMP_BED_PIN                        PF3   // T0 <-> Bed
 
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 PD0
+  #define MAX31865_SCK_PIN                  PD2
+  #define MAX31865_MOSI_PIN                 PD5
+  #define MAX31865_CS_PIN                   PE0
+  #define MAX6675_SS_PIN                    PE4
+  #define MAX31865_CS2_PIN                  PE2
+  #define MAX6675_SS2_PIN                   PE4
+#endif
+
 //
 // Heaters / Fans
 //

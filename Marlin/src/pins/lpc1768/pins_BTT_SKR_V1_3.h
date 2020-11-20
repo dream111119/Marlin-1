@@ -215,6 +215,11 @@
 #define EXPA2_10_PIN                       P0_17
 
 #if HAS_WIRED_LCD
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
+  
   #if ENABLED(ANET_FULL_GRAPHICS_LCD_ALT_WIRING)
     #error "ANET_FULL_GRAPHICS_LCD_ALT_WIRING only applies to the ANET 1.0 board."
 

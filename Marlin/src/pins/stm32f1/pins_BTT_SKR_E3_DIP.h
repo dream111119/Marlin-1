@@ -147,6 +147,19 @@
 #define TEMP_0_PIN                          PA0   // Analog Input "TH0"
 #define TEMP_BED_PIN                        PC3   // Analog Input "TB0"
 
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 PB8
+  #define MAX31865_SCK_PIN                  PB7
+  #define MAX31865_MOSI_PIN                 PB9
+  #define MAX31865_CS_PIN                   PA10
+  #define MAX6675_SS_PIN                    PB6
+  #define MAX31865_CS2_PIN                  PA9
+  #define MAX6675_SS2_PIN                   PB6
+#endif
+
 //
 // Heaters / Fans
 //
@@ -172,6 +185,10 @@
  */
 
 #if HAS_WIRED_LCD
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
 
   #if ENABLED(CR10_STOCKDISPLAY)
 
@@ -228,6 +245,10 @@
 #endif // HAS_WIRED_LCD
 
 #if BOTH(TOUCH_UI_FTDI_EVE, LCD_FYSETC_TFT81050)
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
 
   #error "CAUTION! LCD_FYSETC_TFT81050 requires wiring modifications. See 'pins_BTT_SKR_E3_DIP.h' for details. Comment out this line to continue."
 

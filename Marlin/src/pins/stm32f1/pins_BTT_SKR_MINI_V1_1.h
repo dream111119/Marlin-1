@@ -95,6 +95,19 @@
 #define TEMP_BED_PIN                        PB1   // Analog Input
 #define TEMP_0_PIN                          PA0   // Analog Input
 
+//Max31865
+//Thermocouple sensor
+//if the TEMP_SENSOR value of - 5 is enabled in the configuration file, it will work
+#ifndef MAX31865_CS_PIN                     
+  #define MAX31865_MISO_PIN                 PC10
+  #define MAX31865_SCK_PIN                  PC11
+  #define MAX31865_MOSI_PIN                 PB6
+  #define MAX31865_CS_PIN                   PC12
+  #define MAX6675_SS_PIN                    PB7
+  #define MAX31865_CS2_PIN                  PC13
+  #define MAX6675_SS2_PIN                   PB7
+#endif
+
 //
 // LCD Pins
 //
@@ -111,6 +124,11 @@
  */
 
 #if HAS_WIRED_LCD
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
+  
   #define BEEPER_PIN                        PC10
   #define BTN_ENC                           PC11
 

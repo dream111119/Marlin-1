@@ -67,6 +67,10 @@
 
 #if IS_TFTGLCD_PANEL
 
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
+
   #if ENABLED(TFTGLCD_PANEL_SPI)
     #define TFTGLCD_CS                     P3_26
   #endif
@@ -74,6 +78,10 @@
   #define SD_DETECT_PIN                    P1_31
 
 #elif HAS_WIRED_LCD
+
+  #if (TEMP_SENSOR_0==-5)||(TEMP_SENSOR_1==-5)
+  #error "The display such as CR10 and max31865 cannot be used at the same time. Please close one of them to continue"
+  #endif
 
   #define BTN_EN1                          P3_26
   #define BTN_EN2                          P3_25
