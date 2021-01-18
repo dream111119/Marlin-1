@@ -135,7 +135,7 @@
     #define SD_DETECT_PIN                   PB9
 
   #else
-
+  
     #define LCD_PINS_RS                     PC12
 
     #define BTN_EN1                         PD2
@@ -174,6 +174,20 @@
 
     #else                                         // !FYSETC_MINI_12864
 
+      #ifdef BTT_TFT35_SPIV1_0 
+
+          #define TFT_CS_PIN                     PA15
+          #define TFT_A0_PIN                     PB9
+          #define TFT_DC_PIN                     PC14
+          
+          #define TOUCH_INT_PIN                  PC15
+          #define TOUCH_MISO_PIN                 PB7
+          #define TOUCH_MOSI_PIN                 PB6
+          #define TOUCH_SCK_PIN                  PC13
+          #define TOUCH_CS_PIN                   PC12
+
+      #endif
+
       #define LCD_PINS_D4                   PC13
       #if IS_ULTIPANEL
         #define LCD_PINS_D5                 PB7
@@ -203,6 +217,37 @@
   #endif
 
 #endif // HAS_WIRED_LCD
+
+#ifdef  EXTENSIBLE_UI
+
+    #ifndef BABYSTEPPING
+     #error "BTT-UI-MODE It needs to be turned on BABYSTEPPING！"
+    #endif
+      #define TOUCH_INT_PIN    PC15
+      #define TOUCH_MISO_PIN   PB7
+      #define TOUCH_MOSI_PIN   PB6
+      #define TOUCH_SCK_PIN    PC13
+      #define TOUCH_CS_PIN     PC12
+      
+
+      #define W25Qxx_CS_PIN    PC14
+      
+      #define SPI4LINLCD_CS0   PA15
+      #define SPI4LINLCD_RS    PB9
+      #define SPI4LINLCD_SCL   PB3
+      #define SPI4LINLCD_SDA   PB5
+
+      #define BEEPER_PIN       PC10
+
+      #define LCD_ENCA_PIN  PD2
+      #define LCD_ENCB_PIN  PB8
+      #define LCD_BTN_PIN   PC11
+
+      #ifndef FIL_RUNOUT_PIN
+        #define FIL_RUNOUT_PIN          PB4  // "E0-STOP"
+      #endif
+   
+#endif
 
 //
 // SD Card

@@ -392,8 +392,31 @@
     #if SD_CONNECTION_IS(ONBOARD)
       #define SOFTWARE_SPI
     #endif
-  #else
+  #elif  ENABLED(BTT_TFT35_SPIV1_0) 
+                   
+      #define TFT_CS_PIN                     PB12
+      #define TFT_A0_PIN                     PB10
+      #define TFT_SCK_PIN                    PB13
+      #define TFT_MISO_PIN                   PB14
+      #define TFT_MOSI_PIN                   PB15
 
+      #define TOUCH_INT_PIN                  PG6
+      #define TOUCH_MISO_PIN                 PG7
+      #define TOUCH_MOSI_PIN                 PC10
+      #define TOUCH_SCK_PIN                  PG8
+      #define TOUCH_CS_PIN                   PA8
+      
+      #define TOUCH_CALIBRATION_X           16692
+      #define TOUCH_CALIBRATION_Y           -12115
+      #define TOUCH_OFFSET_X                -11
+      #define TOUCH_OFFSET_Y                350
+      #define TOUCH_ORIENTATION      TOUCH_LANDSCAPE
+
+      #define BTN_EN1                        PD10
+      #define BTN_EN2                        PH10
+
+  #else  
+   
     #define LCD_PINS_RS                     PA8
 
     #define BTN_EN1                         PD10
@@ -454,5 +477,32 @@
   #endif
 
 #endif // HAS_WIRED_LCD
+
+
+#ifdef  BTT_UI_SPI
+
+    #define TOUCH_INT_PIN    PG6
+    #define TOUCH_MISO_PIN   PG7
+    #define TOUCH_MOSI_PIN   PC10
+    #define TOUCH_SCK_PIN    PG8
+    #define TOUCH_CS_PIN     PA8
+    
+    #define W25Qxx_CS_PIN    PG5
+    
+    #define SPI4LINLCD_CS0   PB12
+    #define SPI4LINLCD_RS    PB10
+    #define SPI4LINLCD_SCL   PB13
+    #define SPI4LINLCD_SDA   PB15
+
+    #define BEEPER_PIN         PC11
+    #ifndef FIL_RUNOUT_PIN
+      #define FIL_RUNOUT_PIN                    PC15  // "E0-STOP"
+    #endif
+
+    #define LCD_ENCA_PIN  PD10
+    #define LCD_ENCB_PIN  PH10
+    #define LCD_BTN_PIN   PA15
+   
+#endif
 
 #undef TP

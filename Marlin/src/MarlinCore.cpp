@@ -233,6 +233,10 @@
   #include "feature/password/password.h"
 #endif
 
+#if ENABLED(BTT_UI_SPI)
+ bool LCD_home_flag = false;
+#endif
+
 PGMSTR(NUL_STR, "");
 PGMSTR(M112_KILL_STR, "M112 Shutdown");
 PGMSTR(G28_STR, "G28");

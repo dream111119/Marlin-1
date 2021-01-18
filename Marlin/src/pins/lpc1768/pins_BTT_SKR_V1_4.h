@@ -33,7 +33,7 @@
 // SD Connection
 //
 #ifndef SDCARD_CONNECTION
-  #define SDCARD_CONNECTION LCD
+  #define SDCARD_CONNECTION ONBOARD
 #endif
 
 //
@@ -396,7 +396,50 @@
     #define LCD_PINS_RS                    -1
 
     #define TFT_BUFFER_SIZE                 2400
+    
+     #ifdef BTT_TFT35_SPIV1_0 
+   
 
+      #undef  TFT_CS_PIN 
+      #undef  TFT_A0_PIN
+      //#undef  TFT_DC_PIN
+      #undef  TFT_BACKLIGHT_PIN 
+      #undef  TFT_RESET_PIN
+      
+      #undef   SD_SCK_PIN 
+      #undef   SD_MISO_PIN
+      #undef   SD_MOSI_PIN  
+
+      #undef  TOUCH_INT_PIN
+      #undef  TOUCH_MISO_PIN                
+      #undef  TOUCH_MOSI_PIN                
+      #undef  TOUCH_SCK_PIN                 
+      #undef  TOUCH_CS_PIN   
+      #undef  TOUCH_BUTTONS_HW_SPI
+      #undef  TOUCH_BUTTONS_HW_SPI_DEVICE                     
+      
+      #define TFT_CS_PIN                     P0_16
+      #define TFT_A0_PIN                     P1_31
+      //#define TFT_DC_PIN                     P1_31
+
+
+      #define TOUCH_INT_PIN                  P1_22
+      #define TOUCH_MISO_PIN                 P1_21
+      #define TOUCH_MOSI_PIN                 P1_18
+      #define TOUCH_SCK_PIN                  P1_20
+      #define TOUCH_CS_PIN                   P1_19
+      
+      #define  TOUCH_CALIBRATION_X           20755
+      #define  TOUCH_CALIBRATION_Y          -13918
+      #define  TOUCH_OFFSET_X                -80
+      #define  TOUCH_OFFSET_Y                369
+      #define  TOUCH_ORIENTATION      TOUCH_LANDSCAPE
+
+      #define BTN_ENC                        P0_28  // (58) open-drain
+      #define BTN_EN1                        P3_26  // (31) J3-2 & AUX-4
+      #define BTN_EN2                        P3_25  // (33) J3-4 & AUX-4
+      
+     #endif  
   #elif IS_TFTGLCD_PANEL
 
     #if ENABLED(TFTGLCD_PANEL_SPI)
@@ -475,6 +518,44 @@
   #endif // HAS_MARLINUI_U8GLIB
 
 #endif // HAS_WIRED_LCD
+
+#ifdef  BTT_UI_SPI
+    
+    #ifndef BABYSTEPPING
+     #error "BTT-UI-MODE It needs to be turned on BABYSTEPPING！"
+    #endif
+    #if  SDCARD_CONNECTION == (LCD)
+    // #error "If on BTT-UI-MODE,SDCARD_CONNECTION can't be LCD!"
+    #endif
+
+    #define TOUCH_INT_PIN    P1_22
+    #define TOUCH_MISO_PIN   P1_21
+    #define TOUCH_MOSI_PIN   P1_18
+    #define TOUCH_SCK_PIN    P1_20
+    #define TOUCH_CS_PIN     P1_19
+
+    #define W25Qxx_CS_PIN    P1_23
+    
+    #define SPI4LINLCD_CS0   P0_16
+    #define SPI4LINLCD_RS    P1_31
+    #define SPI4LINLCD_SCL   P0_15
+    #define SPI4LINLCD_SDA   P0_18
+
+    #define TFT_CS_PIN                     P0_16
+    #define TFT_A0_PIN                     P1_31
+    #define TFT_MISO_PIN                   P0_17
+
+    
+    #define BEEPER_PIN                        P1_30
+    #ifndef FIL_RUNOUT_PIN
+      #define FIL_RUNOUT_PIN                    PC15  // "E0-STOP"
+    #endif
+
+    #define LCD_ENCA_PIN  P3_26
+    #define LCD_ENCB_PIN  P3_25
+    #define LCD_BTN_PIN   P0_28
+    
+#endif
 
 #if HAS_ADC_BUTTONS
   #error "ADC BUTTONS do not work unmodifed on SKR 1.4, The ADC ports cannot take more than 3.3v."

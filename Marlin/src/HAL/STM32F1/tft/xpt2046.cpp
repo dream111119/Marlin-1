@@ -139,6 +139,23 @@ uint16_t XPT2046::SoftwareIO(uint16_t data) {
   WRITE(TOUCH_SCK_PIN, LOW);
 
   return result;
+
+  //    uint16_t result = 0;
+
+  // for (uint8_t j = 0x80; j > 0; j >>= 1) {
+  //   WRITE(TOUCH_SCK_PIN, LOW);
+  //   __DSB();
+  //   WRITE(TOUCH_MOSI_PIN, data & j ? HIGH : LOW);
+  //   __DSB();
+  //   if (READ(TOUCH_MISO_PIN)) result |= j;
+  //   __DSB();
+  //   WRITE(TOUCH_SCK_PIN, HIGH);
+  //   __DSB();
+  // }
+  // WRITE(TOUCH_SCK_PIN, LOW);
+  // __DSB();
+
+  // return result;
 }
 
 #endif // HAS_TFT_XPT2046
